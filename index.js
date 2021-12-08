@@ -6,7 +6,6 @@ require('dotenv').config();
 
 var cors = require('cors')
 
-//firebase initilazition
 
 var admin = require("firebase-admin");
 
