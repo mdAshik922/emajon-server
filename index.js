@@ -24,26 +24,24 @@ app.use(express.json())
 const { MongoClient } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.89jki.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-// console.log(uri);
 
 
 async function verifyToken (req, res, next){
   if(req.headers?.authorization?.startsWith('Bearer ')){
      const Token = req.headers.authorization.split(' ')[1];
-    //  console.log('seperet ',idToken);
-
+  
     try{
-const decodedUser = await admin.auth().verifyToken(Token)
+const decodedUser = await admin.auth().verifyToken(Token);
 console.log('email', decodedUser.email);
 
-req.decodedUserEmail = decodedUser.email
+req.decodedUserEmail = decodedUser.email;
     }
     catch{
 
-    }
+    };
 }
 next();
-}
+};
 
 
 async function run(){
@@ -66,12 +64,12 @@ app.get('/products', async(req, res) =>{
     }
     else{
       products = await coursor.toArray();
-    }
+    };
     res.send({
       count,
       products
     });
-      })
+      });
 
       //use post request
       app.post('/products/byKeys', async(req, res) =>{
@@ -80,7 +78,7 @@ app.get('/products', async(req, res) =>{
         const query = {key: {$in: keys}};
         const products = productCollection.find(query);
         res.json(products);
-      })
+      });
 
       app.get('/order', verifyToken, async(req, res) =>{
         
@@ -93,16 +91,16 @@ app.get('/products', async(req, res) =>{
       }
       else{
         res.status(401).json({message: 'user not found unothorize'})
-      }
+      };
        
-      })
+      });
 
       app.post('/order', async(req, res)=>{
         const order = req.body;
         order.createdAt = new Date();
         const result = ordersCollection.insertOne(order);
-        res.json(result)
-      })
+        res.json(result);
+      });
 }
 finally{
 //
