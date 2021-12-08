@@ -29,11 +29,11 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function verifyToken (req, res, next){
   if(req.headers?.authorization?.startsWith('Bearer ')){
-     const idToken = req.headers.authorization.split('Bearer ')[1];
+     const Token = req.headers.authorization.split(' ')[1];
     //  console.log('seperet ',idToken);
 
     try{
-const decodedUser = await admin.auth().verifyToken(idToken)
+const decodedUser = await admin.auth().verifyToken(Token)
 console.log('email', decodedUser.email);
 
 req.decodedUserEmail = decodedUser.email
