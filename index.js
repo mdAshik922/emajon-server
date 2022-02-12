@@ -11,7 +11,8 @@ var admin = require("firebase-admin");
 
 var serviceAccount = require('./second-ema-firebase-adminsdk-dlegi-f9e5c91afb.json');
 
-
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
 });
 
 
