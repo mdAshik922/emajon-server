@@ -59,7 +59,7 @@ app.get('/products', async(req, res) =>{
   
     const count = await coursor.count();
     if(page) {
-     
+      products = await coursor.skip(page*size).limit(size).toArray();
     }
     else{
       products = await coursor.toArray();
