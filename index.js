@@ -88,7 +88,9 @@ app.get('/products', async(req, res) =>{
         const orders = await coursor.toArray();
         res.json(orders); 
       }
-     
+      else{
+        res.status(401).json({message: 'user not found unothorize'})
+      };
        
       });
 
