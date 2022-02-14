@@ -84,7 +84,8 @@ app.get('/products', async(req, res) =>{
         const email = req.query.email;
       if(req.decodedUserEmail === email){
         const  query= {email: email};
-        
+        const coursor = ordersCollection.find(query);
+        const orders = await coursor.toArray();
         res.json(orders); 
       }
       else{
