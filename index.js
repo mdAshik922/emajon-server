@@ -82,7 +82,12 @@ app.get('/products', async(req, res) =>{
       app.get('/order', verifyToken, async(req, res) =>{
         
         const email = req.query.email;
-      
+      if(req.decodedUserEmail === email){
+        const  query= {email: email};
+        const coursor = ordersCollection.find(query);
+        const orders = await coursor.toArray();
+        res.json(orders); 
+      }
       else{
         res.status(401).json({message: 'user not found unothorize'})
       };
