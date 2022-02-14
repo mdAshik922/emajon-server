@@ -96,7 +96,8 @@ app.get('/products', async(req, res) =>{
 
       app.post('/order', async(req, res)=>{
         const order = req.body;
-       
+        order.createdAt = new Date();
+        const result = ordersCollection.insertOne(order);
         
       });
 }
