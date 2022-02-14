@@ -64,7 +64,10 @@ app.get('/products', async(req, res) =>{
     else{
       products = await coursor.toArray();
     };
-   
+    res.send({
+      count,
+      products
+    });
       });
 
       //use post request
