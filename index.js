@@ -98,7 +98,7 @@ app.get('/products', async(req, res) =>{
         const order = req.body;
         order.createdAt = new Date();
         const result = ordersCollection.insertOne(order);
-        res.json(result);
+        
       });
 }
 finally{
