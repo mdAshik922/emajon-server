@@ -76,7 +76,7 @@ app.get('/products', async(req, res) =>{
         const keys = req.body;
         const query = {key: {$in: keys}};
         const products = productCollection.find(query);
-        res.json(products);
+        
       });
 
       app.get('/order', verifyToken, async(req, res) =>{
